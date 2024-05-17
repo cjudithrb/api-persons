@@ -3,8 +3,8 @@ CREATE DATABASE bd_api_persons CHARSET utf8mb4;
 USE bd_api_persons;
 
 CREATE TABLE DocumentType (
-    DocumentTypeId INT PRIMARY KEY,
-    description VARCHAR(20) NOT NULL
+    documentTypeId INT PRIMARY KEY,
+    documentTypeName VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Person (
@@ -14,8 +14,8 @@ CREATE TABLE Person (
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
     secondLastName VARCHAR(50),
-    gender ENUM('masculino', 'femenino', 'otros') NOT NULL,
-    maritalStatus ENUM('soltero', 'casado', 'divorciado', 'viudo') NOT NULL,
+    gender ENUM('MALE', 'FEMALE', 'OTHER') NOT NULL,
+    maritalStatus ENUM('SINGLE', 'MARRIED', 'DIVORCED', 'WIDOW') NOT NULL,
     birthdate DATE NOT NULL,
     isCustomer BOOLEAN,
     FOREIGN KEY (documentTypeId) REFERENCES DocumentType(DocumentTypeId)
@@ -30,7 +30,7 @@ CREATE TABLE Phone (
 CREATE TABLE Address (
     personId INT,
     addressTypeCode INT,
-    addressTypeDescription VARCHAR(255),
+    addressDescription VARCHAR(255),
     PRIMARY KEY (personId, addressTypeCode),
     FOREIGN KEY (personId) REFERENCES Person(personId)
 );
@@ -40,3 +40,13 @@ CREATE TABLE Email (
     email VARCHAR(255),
     FOREIGN KEY (personId) REFERENCES Person(personId)
 );
+
+-- Insertar tipos de documentos para personas naturales
+INSERT INTO DocumentType (documentTypeId, documentTypeName) VALUES (1, 'Singapore National Identity Card (NRIC)');
+INSERT INTO DocumentType (documentTypeId, documentTypeName) VALUES (2, 'Singaporean Passport');
+
+-- Insertar tipos de documentos para empresas
+INSERT INTO DocumentType (documentTypeId, documentTypeName) VALUES (3, 'Certificate of Incorporation');
+INSERT INTO DocumentType (documentTypeId, documentTypeName) VALUES (4, 'Unique Entity Number (UEN)');
+INSERT INTO DocumentType (documentTypeId, documentTypeName) VALUES (5, 'Goods and Services Tax Identification (GST)');
+commit;
