@@ -4,10 +4,10 @@ import schemas
 
 app = FastAPI()
 
-host_name = ""  # Agrega el nombre del host de la base de datos
+host_name = "34.236.117.148"  # Agrega el nombre del host de la base de datos
 port_number = "8005"  # Agrega el número de puerto de la base de datos
 user_name = "root"
-password_db = ""
+password_db = "utec"
 database_name = "bd_api_persons"  # Modifica el nombre de la base de datos
 
 # Conexión a la base de datos
@@ -21,7 +21,7 @@ def connect_to_db():
     )
 
 # Obtener todas las personas
-@app.get("/person", response_model=list[schemas.PersonOutput])
+@app.get("/api/v1/person", response_model=list[schemas.PersonOutput])
 def get_persons():
     mydb = connect_to_db()
     cursor = mydb.cursor()
@@ -33,7 +33,7 @@ def get_persons():
     return result
 
 # Obtener una persona por su ID
-@app.get("/person/{id}", response_model=schemas.PersonOutput)
+@app.get("/api/v1/person/{id}", response_model=schemas.PersonOutput)
 def get_person(id: int):
     mydb = connect_to_db()
     cursor = mydb.cursor()
@@ -51,7 +51,7 @@ def get_person(id: int):
     return result
 
 # Agregar una nueva persona
-@app.post("/person", response_model=schemas.PersonOutput, status_code=status.HTTP_201_CREATED)
+@app.post("/api/v1/person", response_model=schemas.PersonOutput, status_code=status.HTTP_201_CREATED)
 def add_person(item: schemas.PersonInput):
     mydb = connect_to_db()
     cursor = mydb.cursor()
@@ -65,7 +65,7 @@ def add_person(item: schemas.PersonInput):
     return {"personId": inserted_id, **item.dict()}
 
 # Modificar una persona por su ID
-@app.put("/person/{id}", response_model=schemas.PersonOutput)
+@app.put("/api/v1/person/{id}", response_model=schemas.PersonOutput)
 def update_person(id: int, item: schemas.PersonInput):
     mydb = connect_to_db()
     cursor = mydb.cursor()
@@ -79,7 +79,7 @@ def update_person(id: int, item: schemas.PersonInput):
     return {"personId": id, **item.dict()}
 
 # Eliminar una persona por su ID
-@app.delete("/person/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@app.delete("/api/v1/person/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_person(id: int):
     mydb = connect_to_db()
     cursor = mydb.cursor()
