@@ -6,6 +6,7 @@ class PersonInput(BaseModel):
     documentNumber: str
     firstName: str
     lastName: str
+    secondLastName: str
     gender: str
     maritalStatus: str
     birthdate: date
@@ -16,6 +17,7 @@ class PersonOutput(BaseModel):
     documentNumber: str
     firstName: str
     lastName: str
+    secondLastName: str
     gender: str
     maritalStatus: str
     birthdate: date
