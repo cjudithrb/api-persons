@@ -14,10 +14,12 @@ CREATE TABLE Person (
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
     secondLastName VARCHAR(50),
-    gender ENUM('MALE', 'FEMALE', 'OTHER') NOT NULL,
-    maritalStatus ENUM('SINGLE', 'MARRIED', 'DIVORCED', 'WIDOW') NOT NULL,
+    gender ENUM('male', 'female', 'other'),
+    maritalStatus ENUM('single', 'married', 'divorced', 'widow'),
     birthdate DATE NOT NULL,
-    isCustomer BOOLEAN,
+    isCustomer BOOLEAN NOT NULL,
+    registerDate DATETIME NOT NULL,
+    status ENUM('active', 'inactive') NOT NULL,
     FOREIGN KEY (documentTypeId) REFERENCES DocumentType(DocumentTypeId)
 );
 

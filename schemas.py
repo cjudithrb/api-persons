@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date
+from datetime import date, datetime  # Añadir datetime
 
 class PersonInput(BaseModel):
     documentTypeId: int
@@ -22,3 +22,4 @@ class PersonOutput(BaseModel):
     maritalStatus: str
     birthdate: date
     isCustomer: bool
+    registerDate: datetime  # Cambiar datetime a datetime
